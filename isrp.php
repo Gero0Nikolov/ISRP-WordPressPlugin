@@ -87,7 +87,7 @@ class ISRP_LL {
     }
 
     function isrp_ll_get_post() {
-        $listed_posts = isset( $_POST[ "listed_posts" ] ) && !empty( $_POST[ "listed_posts" ] ) && is_array( $_POST[ "listed_posts" ] ) ? $_POST[ "listed_posts" ] : array();
+        $listed_posts = isset( $_POST[ "listed_posts" ] ) && !empty( $_POST[ "listed_posts" ] ) && is_array( $_POST[ "listed_posts" ] ) ? $this->isrp_ll_sanitize_post_ids( $_POST[ "listed_posts" ] ) : array();
         $response = false;
 
         $args = array(
@@ -108,6 +108,17 @@ class ISRP_LL {
 
         echo json_encode( $response );
         die( "" );
+    }
+
+    function isrp_ll_sanitize_post_ids( $ids ) {
+        $result = array();
+
+        foreach ( $ids as $id ) {
+            $id = intval( $id );
+            if ( $id > 0 ) { array_push( $result, $id ); }
+        }
+
+        return $result;
     }
 
     function isrp_ll_internal_tracking() {

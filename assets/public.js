@@ -80,6 +80,10 @@ jQuery( document ).ready( function(){
                         listed_posts: isrpLoadedPosts
                     },
                     success: function( response ) {
+                        // Remove the Loading Sign
+                        jQuery( "#isrp-ll-loader" ).remove();
+
+                        // Work with Results
                         if ( typeof response !== "undefined" ) {
                             isrpDataObject = JSON.parse( response );
                             if ( isrpDataObject !== false ) {
@@ -89,9 +93,6 @@ jQuery( document ).ready( function(){
                                     type: "GET",
                                     data: {},
                                     success: function( response ) {
-                                        // Remove the Loading Sign
-                                        jQuery( "#isrp-ll-loader" ).remove();
-                                        
                                         if ( typeof response ) {
                                             // Add the new post to the loaded data
                                             isrpLoadedPosts.push( isrpDataObject.post_id );
