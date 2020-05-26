@@ -18,9 +18,6 @@ class ISRP_LL {
 
         // Register Plugin Activation Hook
         register_activation_hook( __FILE__, array( $this, "isrp_ll_prep_db" ) );
-
-        // Register Lazy Load Trigger Filter
-        add_filter( "wp_head", array( $this, "isrp_ll_head" ) );
         
         // Register needed assets
         add_action( "wp_enqueue_scripts", array( $this, "isrp_ll_register_assets" ) );
@@ -71,18 +68,13 @@ class ISRP_LL {
         }
     }
 
-    function isrp_ll_head() {
-        // Load the WP Ajax URL on Posts Only
-        if ( is_singular( "post" ) ) {
-            echo "<script type='text/javascript'>var isrpLLAjaxURL = '". admin_url( "admin-ajax.php" ) ."';</script>";
-        }
-    }
-
     function isrp_ll_register_assets() {
         // Load the needed assets only on Posts
         if ( is_singular( "post" ) ) {
             wp_enqueue_script( "isrp_ll_public_js", plugins_url( "/assets/public.js" , __FILE__ ), array( "jquery" ), $this->_ASSETS_VERSION, true );
             wp_enqueue_style( "isrp_ll_public_css", plugins_url( "/assets/public.css", __FILE__ ), array(), $this->_ASSETS_VERSION, "screen" );
+
+            wp_localize_script( "isrp_ll_public_js", "isrpLLAjaxURL", admin_url( "admin-ajax.php" ) );
         }
     }
 
