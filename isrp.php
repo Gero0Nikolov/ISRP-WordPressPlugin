@@ -122,7 +122,7 @@ class ISRP_LL {
         global $wpdb;
         $isrp_tracker_unique = $wpdb->prefix ."isrp_tracker_unique";
         $tracking = new stdClass;
-        $tracking->url = $_SERVER[ "REDIRECT_URL" ];
+        $tracking->url = isset( $_SERVER[ "REDIRECT_URL" ] ) ? $_SERVER[ "REDIRECT_URL" ] : $_SERVER[ "REQUEST_URI" ];
         $tracking->ip = $_SERVER[ "REMOTE_ADDR" ];
         $tracking->user_agent = $_SERVER[ "HTTP_USER_AGENT" ];
 
