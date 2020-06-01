@@ -19,12 +19,15 @@ will implement AJAX loading (Infinite Scroll) for the article pages.<br>
 The next article will be loaded when the user gets to the bottom of each article.<br>
 URLs will be changed in the address bar when the user scrolls down to the second, third, fourth... article.<br>
 
-<strong>How it works ?</strong>
+<strong>How it works?</strong>
 <br>
 Simple as its name is.<br>
 ISRP will automatically connect to your Posts Single Page and will load random Posts<br>
 from Post Type <strong>post</strong> once the user hits the end of the page.<br>
 That's all, plug and play!
+
+<strong>Looking for a DEMO?</strong>
+Check it <a href="https://geronikolov.com/escaping-the-recession-in-life/" target="_blank">here</a>.
 
 == Installation ==
 
@@ -38,3 +41,5 @@ clone the repository from GitHub - https://github.com/Gero0Nikolov/ISRP-WordPres
 to your wp-content/wp-plugins/ folder and activate it from the WordPress Dashboard after that.
 
 == Screenshots ==
+1. Escaping the recession in life; - Original Blog Post
+2. Should Automated Trading be for EVERYONE(); - Lazy Loaded Blog Post
