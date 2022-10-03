@@ -19,3 +19,7 @@ the user gets to the bottom of each article. URLs will be changed in the address
 **C)** Activate the plugin from the dashboard
 
 **Note:** The plugin is designed to work with every standart WordPress theme, but in order for the plugin to work with custom developed templates it may need a bit of touches.
+
+### Log:
+**1.1** - Update tested version of WP Core to 6.0.2
+**1.0** - Release
