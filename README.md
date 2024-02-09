@@ -22,7 +22,7 @@ the user gets to the bottom of each article. URLs will be changed in the address
 
 ### Log:
 **1.2**
-- Update tested version of WP Core to 6.0.2
+- Update tested version of WP Core to 6.3.1
 - Replaced deprecated wp_localize_script function
 - Removed internal tracking code
 
