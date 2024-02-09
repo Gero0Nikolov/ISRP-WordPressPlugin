@@ -10,9 +10,9 @@ the user gets to the bottom of each article. URLs will be changed in the address
 
 **assets/** - Contains **JS**, **SCSS** and compiled **CSS** files used by the plugin
 
-**Instalation guide:**
+**Installation guide:**
 
-**A)** Standart WordPress installation.
+**A)** Standard WordPress installation.
 
 **B)** Put the plugin folder (clone it) into the **wp-content/plugins/** folder.
 
@@ -21,5 +21,13 @@ the user gets to the bottom of each article. URLs will be changed in the address
 **Note:** The plugin is designed to work with every standart WordPress theme, but in order for the plugin to work with custom developed templates it may need a bit of touches.
 
 ### Log:
-**1.1** - Update tested version of WP Core to 6.0.2
-**1.0** - Release
+**1.2**
+- Update tested version of WP Core to 6.3.1
+- Replaced deprecated wp_localize_script function
+- Removed internal tracking code
+
+**1.1**
+- Update tested version of WP Core to 6.0.2
+
+**1.0**
+- Release

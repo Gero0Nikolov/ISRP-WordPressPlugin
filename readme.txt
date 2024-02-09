@@ -1,10 +1,10 @@
 === Infinite Scroll Random Post ===
-Contributors: GeroNikolov
+Contributors: GeroNikolov, dylanfetch
 Donate link: https://geronikolov.com/
 Tags: Open Source, Infinite Scroll, Random Post, Lazy Load, Lazy Loading, Listing
 Requires at least: 3.0.1
-Tested up to: 6.0.2
-Stable tag: 1.
+Tested up to: 6.3.1
+Stable tag: 1.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,13 @@ Check it <a href="https://geronikolov.com/escaping-the-recession-in-life/" targe
 
 <strong>Log:</strong>
 <ul>
+
+    <li>1.2 - Update tested version of WP Core to 6.3.1
+        <ul>
+            <li>Replaced deprecated wp_localize_script function</li>
+            <li>Removed internal tracking code</li>
+        </ul>
+    </li>
     <li>1.1 - Update tested version of WP Core to 6.0.2</li>
     <li>1.0 - Release</li>
 </ul>
