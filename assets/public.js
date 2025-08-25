@@ -73,11 +73,12 @@ jQuery( document ).ready( function(){
 
                 // Load a the new post
                 jQuery.ajax( {
-                    url: isrpLLAjaxURL,
+                    url: isrpLLData.ajax_url,
                     type: "POST",
                     data: {
                         action: "isrp_ll_get_post",
-                        listed_posts: isrpLoadedPosts
+                        listed_posts: isrpLoadedPosts,
+                        nonce: isrpLLData.nonce
                     },
                     success: function( response ) {
                         // Remove the Loading Sign
