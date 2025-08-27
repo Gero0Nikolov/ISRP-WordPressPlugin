@@ -110,18 +110,15 @@ jQuery( document ).ready( function(){
                                     }
                                 },
                                 error: function( response ) {
-                                    console.log( response );
                                     isrpLLLocked = false;
                                 }
                             } );
                         } else {
-                            console.log( response );
                             isrpLLLocked = false;
                         }
                     },
                     error: function( response ) {
                         jQuery( "#isrp-ll-loader" ).remove();
-                        console.log( response );
                         isrpLLLocked = false;
                     }
                 } );
