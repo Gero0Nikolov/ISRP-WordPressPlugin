@@ -2,7 +2,7 @@
 var isrpLLLocked = false;
 var isrpLoadedPosts = [];
 var isrpPostsToObject = {};
-var isrpLoadingLabel = "<p id='isrp-ll-loader' class='isrp-ll-loader'>Loading...</p>";
+var isrpLoadingLabel = "<p id='isrp-ll-loader' class='isrp-ll-loader'>" + isrpLLStrings.loading + "</p>";
 var isrpDataObject;
 var isrpPostInViewportID;
 var isrpLastScrollPosition;
@@ -73,60 +73,56 @@ jQuery( document ).ready( function(){
 
                 // Load a the new post
                 jQuery.ajax( {
-                    url: isrpLLData.ajax_url,
+                    url: isrpLLConfig.ajaxUrl,
                     type: "POST",
+                    dataType: "json",
                     data: {
                         action: "isrp_ll_get_post",
                         listed_posts: isrpLoadedPosts,
-                        nonce: isrpLLData.nonce
+                        nonce: isrpLLConfig.nonce
                     },
                     success: function( response ) {
-                        // Remove the Loading Sign
                         jQuery( "#isrp-ll-loader" ).remove();
 
-                        // Work with Results
-                        if ( typeof response !== "undefined" ) {
-                            isrpDataObject = JSON.parse( response );
-                            if ( isrpDataObject !== false ) {
-                                // Make an AJAX call to the URL of the blog post in order to render it's content and extract it
-                                jQuery.ajax( {
-                                    url: isrpDataObject.permalink,
-                                    type: "GET",
-                                    data: {},
-                                    success: function( response ) {
-                                        if ( typeof response ) {
-                                            // Add the new post to the loaded data
-                                            isrpLoadedPosts.push( isrpDataObject.post_id );
+                        if ( response && response.post_id ) {
+                            isrpDataObject = response;
 
-                                            // Extract the Post Body from the response and build it on the page
-                                            let postBody = response.split( /<main.*?>/ )[ 1 ].split( "</main>" )[ 0 ];
-                                            jQuery( postBody ).insertBefore( $isrpLLTrigger );
-                                            
-                                            // Cache the New Post Title
-                                            let newPostTitle = jQuery( "main>article:last-of-type .entry-title" ).html();
+                            jQuery.ajax( {
+                                url: isrpDataObject.permalink,
+                                type: "GET",
+                                data: {},
+                                success: function( response ) {
+                                    if ( typeof response !== "undefined" ) {
+                                        isrpLoadedPosts.push( isrpDataObject.post_id );
 
-                                            // Cache the New Post as a Post in Viewport
-                                            isrpPostInViewportID = isrpDataObject.post_id;
+                                        let postBody = response.split( /<main.*?>/ )[ 1 ].split( "</main>" )[ 0 ];
+                                        jQuery( postBody ).insertBefore( $isrpLLTrigger );
 
-                                            // Create Post to Object Relation
-                                            createRelation( isrpDataObject.post_id, newPostTitle, isrpDataObject.permalink, true );
+                                        let newPostTitle = jQuery( "main>article:last-of-type .entry-title" ).html();
 
-                                            // Push the Post to the History of the User
-                                            updateAddress( isrpDataObject.post_id, newPostTitle, isrpDataObject.permalink )
+                                        isrpPostInViewportID = isrpDataObject.post_id;
 
-                                            // Unlock the Lazy Loader
-                                            isrpLLLocked = false;
-                                        }
-                                    },
-                                    error: function( response ) {
-                                        console.log( response );
+                                        createRelation( isrpDataObject.post_id, newPostTitle, isrpDataObject.permalink, true );
+
+                                        updateAddress( isrpDataObject.post_id, newPostTitle, isrpDataObject.permalink );
+
+                                        isrpLLLocked = false;
                                     }
-                                } );
-                            }
+                                },
+                                error: function( response ) {
+                                    console.log( response );
+                                    isrpLLLocked = false;
+                                }
+                            } );
+                        } else {
+                            console.log( response );
+                            isrpLLLocked = false;
                         }
                     },
                     error: function( response ) {
+                        jQuery( "#isrp-ll-loader" ).remove();
                         console.log( response );
+                        isrpLLLocked = false;
                     }
                 } );
             }

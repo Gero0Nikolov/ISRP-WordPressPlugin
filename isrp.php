@@ -73,7 +73,7 @@ class ISRP_LL {
             
             // Set Browser Type Index
             $indexing_sql = "CREATE INDEX browser_type ON $isrp_tracker_unique (browser_type);";
-			$index_status = $wpdb->query( $indexing_sql );
+            $index_status = $wpdb->query( $indexing_sql );
         }
     }
 
@@ -88,12 +88,21 @@ class ISRP_LL {
             wp_enqueue_script( "isrp_ll_public_js", plugins_url( "/assets/public.js", __FILE__ ), array( "jquery" ), $this->_ASSETS_VERSION, true );
             wp_enqueue_style( "isrp_ll_public_css", plugins_url( "/assets/public.css", __FILE__ ), array(), $this->_ASSETS_VERSION, "screen" );
 
+            $ll_config = array(
+                "ajaxUrl" => esc_url_raw( admin_url( "admin-ajax.php" ) ),
+                "nonce"   => wp_create_nonce( "isrp_ll_get_post" ),
+            );
+            wp_add_inline_script(
+                "isrp_ll_public_js",
+                "const isrpLLConfig = " . wp_json_encode( $ll_config ) . ";",
+                "before"
+            );
+
             wp_localize_script(
                 "isrp_ll_public_js",
-                "isrpLLData",
+                "isrpLLStrings",
                 array(
-                    "ajax_url" => esc_url_raw( admin_url( "admin-ajax.php" ) ),
-                    "nonce"    => wp_create_nonce( "isrp_ll_get_post" ),
+                    "loading" => esc_html__( "Loading...", "isrp" ),
                 )
             );
         }
