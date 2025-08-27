@@ -92,7 +92,7 @@ jQuery( document ).ready( function(){
                                 type: "GET",
                                 data: {},
                                 success: function( response ) {
-                                    if ( typeof response !== "undefined" ) {
+                                    if ( typeof response !== "undefined" && response !== false ) {
                                         isrpLoadedPosts.push( isrpDataObject.post_id );
 
                                         let postBody = response.split( /<main.*?>/ )[ 1 ].split( "</main>" )[ 0 ];
@@ -114,7 +114,7 @@ jQuery( document ).ready( function(){
                                 }
                             } );
                         } else {
-                            isrpLLLocked = false;
+                            // isrpLLLocked = false;
                         }
                     },
                     error: function( response ) {
